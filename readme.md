@@ -3,13 +3,11 @@ Ansible Docker Installation Role
 
 Installation of a Docker server.
 
-Role Variables
---------------
+## Role Variables
 
 - `docker_compose_version`: The version of docker-compose that should be installed
 
-Example Playbook
-----------------
+## Example Playbook
 
     - hosts: servers
       roles:
