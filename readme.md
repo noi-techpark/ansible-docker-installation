@@ -5,7 +5,7 @@ Installation of a Docker server.
 
 ## Role Variables
 
-- `docker_compose_version`: The version of docker-compose that should be installed
+- `docker_installation_compose_version`: The version of docker-compose that should be installed
 
 ## Example Playbook
 
@@ -13,4 +13,4 @@ Installation of a Docker server.
       roles:
         - role: ansible-docker-installation
           vars:
-            docker_compose_version: 1.25.4
+            docker_installation_compose_version: 1.25.4
