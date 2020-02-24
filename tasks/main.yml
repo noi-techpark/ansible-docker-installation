@@ -21,6 +21,7 @@
       - curl
       - software-properties-common
       - python3-pip
+      - python-pip
       - virtualenv
       - python3-setuptools
       - unzip
@@ -59,15 +60,15 @@
   
   - name: Delete the old AWS CLI temp files
     file:
-      path: /tmp/awscli*
+      path: /tmp/aws
       state: absent
   
   - name: Download and unzip the AWS CLI
     unarchive:
       src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-      dest: /tmp/awscliv2
+      dest: /tmp
       remote_src: yes
   
   - name: Run the AWS CLI installer
-    shell: "/tmp/awscliv2/install -i /usr/local/aws -b /usr/local/bin/aws"
+    shell: "/tmp/aws/install -i /usr/local/aws -b /usr/local/bin/aws"
   
