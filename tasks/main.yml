@@ -8,7 +8,8 @@
   
   - name: Update the server
     apt:
-      update_cache: safe
+      upgrade: safe
+      update_cache: yes
   
   - name: Install required system packages
     apt:
