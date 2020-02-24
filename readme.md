@@ -13,5 +13,5 @@ Example Playbook
 
     - hosts: servers
       roles:
-        - role: noi.docker-installation
+        - role: ansible-docker-installation
           docker_compose_version: 1.25.4
