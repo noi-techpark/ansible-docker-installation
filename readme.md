@@ -9,7 +9,8 @@ Installation of a Docker server.
 
 ## Example Playbook
 
-    - hosts: servers
+    - hosts: all
       roles:
         - role: ansible-docker-installation
-          docker_compose_version: 1.25.4
+          vars:
+            docker_compose_version: 1.25.4
