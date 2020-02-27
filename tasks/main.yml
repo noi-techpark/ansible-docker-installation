@@ -59,9 +59,9 @@
       state: link
 
   - name: Uninstall AWS CLI V1
-  apt:
-    name: awscli
-    state: absent
+    apt:
+      name: awscli
+      state: absent
 
   - name: Delete the old AWS CLI V2 temp files
     file:
