@@ -58,6 +58,14 @@
       dest: /usr/bin/docker-compose
       state: link
 
+  - name: Create /var/docker folder
+    file:
+      dest: /var/docker
+      state: directory
+      owner: root
+      group: docker
+      mode: 0774
+
   - name: Uninstall AWS CLI V1
     apt:
       name: awscli
