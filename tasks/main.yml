@@ -57,18 +57,23 @@
       src: /usr/local/bin/docker-compose
       dest: /usr/bin/docker-compose
       state: link
-  
-  - name: Delete the old AWS CLI temp files
+
+  - name: Uninstall AWS CLI V1
+  apt:
+    name: awscli
+    state: absent
+
+  - name: Delete the old AWS CLI V2 temp files
     file:
       path: /tmp/aws
       state: absent
   
-  - name: Download and unzip the AWS CLI
+  - name: Download and unzip the AWS CLI V2
     unarchive:
       src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
       dest: /tmp
       remote_src: yes
   
-  - name: Run the AWS CLI installer
+  - name: Run the AWS CLI V2 installer
     shell: "/tmp/aws/install -i /usr/local/aws -b /usr/local/bin/aws --update"
   
