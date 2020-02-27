@@ -75,5 +75,5 @@
       remote_src: yes
   
   - name: Run the AWS CLI V2 installer
-    shell: "/tmp/aws/install -i /usr/local/aws -b /usr/local/bin/aws --update"
+    shell: "/tmp/aws/install --update"
   
