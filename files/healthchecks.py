@@ -70,7 +70,7 @@ def main():
             break
 
         # Sleep with timeout
-        if time.time() > start_time + timeout:
+        if start_time + timeout < time.time():
             print('Timeout')
             exit(-1)
 
