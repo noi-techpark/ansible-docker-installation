@@ -1,95 +1,94 @@
 ---
-  - name: Install aptitude using apt
-    apt:
-      name: aptitude
-      state: latest
-      update_cache: yes
-      force_apt_get: yes
-  
-  - name: Update the server
-    apt:
-      upgrade: safe
-      update_cache: yes
-  
-  - name: Install required system packages
-    apt:
-      name: '{{ item }}'
-      state: latest
-    loop:
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - software-properties-common
-      - python3-pip
-      - python-pip
-      - virtualenv
-      - python3-setuptools
-      - unzip
-  
-  - name: Add Docker GPG apt key
-    apt_key:
-      url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
-      state: present
-  
-  - name: Add Docker Repository
-    apt_repository:
-      repo: deb https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
-      state: present
-  
-  - name: Update apt and install docker-ce
-    apt:
-      name: docker-ce
-      state: latest
-      update_cache: yes
-  
-  - name: Install Docker modules for Python
-    pip:
-      name: '{{ item }}'
-    loop:
-      - docker
-      - docker-compose
-  
-  - name: Install docker-compose
-    get_url:
-      url: https://github.com/docker/compose/releases/download/{{ docker_installation_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
-      dest: /usr/local/bin/docker-compose
-      mode: 0755
-  
-  - name: Link docker-compose to bin folder
-    file:
-      src: /usr/local/bin/docker-compose
-      dest: /usr/bin/docker-compose
-      state: link
+- name: Install aptitude using apt
+  apt:
+    name: aptitude
+    state: latest
+    update_cache: yes
+    force_apt_get: yes
 
-  - name: Create /var/docker folder
-    file:
-      dest: /var/docker
-      state: directory
-      owner: root
-      group: docker
-      mode: 0774
+- name: Update the server
+  apt:
+    upgrade: safe
+    update_cache: yes
+
+- name: Install required system packages
+  apt:
+    name: '{{ item }}'
+    state: latest
+  loop:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+    - python3-pip
+    - python-pip
+    - virtualenv
+    - python3-setuptools
+    - unzip
+
+- name: Add Docker GPG apt key
+  apt_key:
+    url: https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable
+    state: present
+
+- name: Update apt and install docker-ce
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+
+- name: Install Docker modules for Python
+  pip:
+    name: '{{ item }}'
+  loop:
+    - docker
+    - docker-compose
+
+- name: Install docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_installation_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+
+- name: Link docker-compose to bin folder
+  file:
+    src: /usr/local/bin/docker-compose
+    dest: /usr/bin/docker-compose
+    state: link
+
+- name: Create /var/docker folder
+  file:
+    dest: /var/docker
+    state: directory
+    owner: root
+    group: docker
+    mode: 0774
 
 - name: Copy health check script
   copy:
     src: healthchecks.py
     dest: /var/docker/healthchecks.py
 
-  - name: Uninstall AWS CLI V1
-    apt:
-      name: awscli
-      state: absent
+- name: Uninstall AWS CLI V1
+  apt:
+    name: awscli
+    state: absent
 
-  - name: Delete the old AWS CLI V2 temp files
-    file:
-      path: /tmp/aws
-      state: absent
-  
-  - name: Download and unzip the AWS CLI V2
-    unarchive:
-      src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-      dest: /tmp
-      remote_src: yes
-  
-  - name: Run the AWS CLI V2 installer
-    shell: "/tmp/aws/install --update"
-  
+- name: Delete the old AWS CLI V2 temp files
+  file:
+    path: /tmp/aws
+    state: absent
+
+- name: Download and unzip the AWS CLI V2
+  unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp
+    remote_src: yes
+
+- name: Run the AWS CLI V2 installer
+  shell: "/tmp/aws/install --update"
