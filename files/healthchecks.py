@@ -77,7 +77,7 @@ def main():
         time.sleep(1)
 
     # Check container health
-    if not areContainersHealthy:
+    if not areContainersHealthy(container_ids):
         print('Containers are unhealthy')
         exit(-1)
 
