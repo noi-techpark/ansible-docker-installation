@@ -69,6 +69,11 @@
       group: docker
       mode: 0774
 
+- name: Copy health check script
+  copy:
+    src: healthchecks.py
+    dest: /var/docker/healthchecks.py
+
   - name: Uninstall AWS CLI V1
     apt:
       name: awscli
