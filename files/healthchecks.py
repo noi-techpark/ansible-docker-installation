@@ -4,8 +4,8 @@ import time
 
 timeout = 60 * 5    # 5 minutes
 
-healthy_statuses = set(['healthy', 'up'])
-unhealthy_statuses = set(['down', 'unhealthy', 'removed'])
+healthy_statuses = set(['healthy', 'running'])
+unhealthy_statuses = set(['unhealthy', 'exited'])
 stabilized_statuses = healthy_statuses | unhealthy_statuses
 
 def executeCommand(command, stdin=None):
