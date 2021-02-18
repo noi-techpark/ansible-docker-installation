@@ -54,6 +54,16 @@
     dest: /usr/bin/docker-compose
     state: link
 
+- name: Adjust Docker logging strategy
+  copy:
+    src: deamon.json
+    dest: /etc/docker/deamon.json
+
+- name: Restart the Docker deamon
+  service:
+    name: docker
+    state: restarted
+
 - name: Create /var/docker folder
   file:
     dest: /var/docker
