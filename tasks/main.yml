@@ -56,10 +56,10 @@
 
 - name: Adjust Docker logging strategy
   copy:
-    src: deamon.json
-    dest: /etc/docker/deamon.json
+    src: daemon.json
+    dest: /etc/docker/daemon.json
 
-- name: Restart the Docker deamon
+- name: Restart the Docker daemon
   service:
     name: docker
     state: restarted
