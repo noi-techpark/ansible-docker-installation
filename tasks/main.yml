@@ -17,6 +17,7 @@
     - virtualenv
     - python3-setuptools
     - unzip
+    - libffi-dev
 
 - name: Add Docker GPG apt key
   apt_key:
