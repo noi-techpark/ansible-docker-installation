@@ -40,19 +40,6 @@
     name: '{{ item }}'
   loop:
     - docker
-    - docker-compose
-
-- name: Install docker-compose
-  get_url:
-    url: https://github.com/docker/compose/releases/download/{{ docker_installation_compose_version }}/docker-compose-{{ ansible_system }}-{{ ansible_userspace_architecture }}
-    dest: /usr/local/bin/docker-compose
-    mode: 0755
-
-- name: Link docker-compose to bin folder
-  file:
-    src: /usr/local/bin/docker-compose
-    dest: /usr/bin/docker-compose
-    state: link
 
 - name: Adjust Docker logging strategy
   copy:
