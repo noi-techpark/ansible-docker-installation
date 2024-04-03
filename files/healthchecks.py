@@ -29,6 +29,12 @@ def getContainerStatus(container_id):
     
     return extractStatus(container_information)
 
+def getContainerName(container_id):
+    command = 'docker inspect --format="{{{{json .Name}}}}" {0}'.format(container_id)
+    container_information = parseJson(executeCommand(command))
+    
+    return container_information
+
 def extractStatus(container_information):
     if 'Health' in container_information:
         return container_information['Health']['Status']
@@ -55,6 +61,8 @@ def areContainersHealthy(container_ids):
         container_state = getContainerStatus(container_id)
 
         if not isStatusHealthy(container_state):
+            container_name = getContainerName(container_id)
+            print("container with id: "  + container_name + " unhealthy")
             return False
 
     return True
@@ -62,7 +70,7 @@ def areContainersHealthy(container_ids):
 def main():
     start_time = time.time()
 
-    container_ids = executeCommand('docker-compose ps --quiet').splitlines()
+    container_ids = executeCommand('docker compose ps --quiet').splitlines()
 
     # Wait until containers are stable
     while True:
