@@ -1,3 +1,5 @@
+[![REUSE Compliance](https://github.com/noi-techpark/ansible-docker-installation/actions/workflows/reuse-lint.yml/badge.svg)](https://github.com/noi-techpark/opendatahub-docs/wiki/REUSE#badges)
+
 Ansible Docker Installation Role
 ================================
 
